@@ -7,8 +7,6 @@ go语言结合[gitee.com/johng/gf](http://gitee.com/johng/gf)的web框架+vue前
 
 # 使用教程
 
-下载本项目(newproject)到控制端和服务端（服务端也可做控制端）,根据对应操作系统，选择对应可执行文件。链接地址https://github.com/yanyuxuanz/dhs/newproject
-
 ## 下载 ##
  ```
  go get github.com/yanyuxuanz/dhs/newproject
