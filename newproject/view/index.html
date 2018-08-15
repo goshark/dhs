@@ -8,22 +8,18 @@
     <link rel="stylesheet" type="text/css" href="/static/js/element-ui/lib/theme-chalk/index.css">
     <link rel="stylesheet" type="text/css" href="/static/css/public.css">
     <link rel="stylesheet" type="text/css" href="/static/css/index.css">
-    <script type="text/javascript" src="/static/js/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript" src="/static/js/vue/dist/vue.js"></script>
     <script type="text/javascript" src="/static/js/element-ui/lib/index.js"></script>
+    <script type="text/javascript" src="/static/js/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript" src="/view/listpage/servertem.js"></script>
-    <script type="text/javascript" src="/view/listpage/mysqllist.js"></script>
+    <script type="text/javascript" src="/view/listpage/squid.js"></script>
     <script type="text/javascript" src="/view/listpage/mode/servermode.js"></script>
 </head>
-<body >
+<body style="background: #f0f0f0;">
     <div id="box">
             <div class="wrapper">
                 <header>    
                     <div class="header">
-                        <!-- 折叠按钮 -->
-                        <div class="collapse-btn" @click="collapseChage">
-                            <i class="el-icon-menu"></i>
-                        </div>
                         <div class="logo">后台管理系统</div>
                         <div class="header-right">
                             <div class="header-user-con">
@@ -34,7 +30,7 @@
                                     </el-tooltip>
                                 </div>
                                 <!-- 用户头像 -->
-                                <div class="user-avator"><img src="static/img/img.jpg"></div>
+                                <div class="user-avator"><img src="/static/img/coin10.png"></div>
                                 <!-- 用户名下拉菜单 -->
                                 <el-dropdown class="user-name" trigger="click" @command="handleCommand">
                                     <span class="el-dropdown-link" >${.user}
@@ -47,33 +43,24 @@
                                 </el-dropdown>
                             </div>
                         </div>
+                        <!-- 折叠按钮 -->
+                        <div class="collapse-btn" @click="sidebarshow = !sidebarshow">
+                            <i class="el-icon-menu" style="line-height: 70px;"> <span style="margin-left: 10px">首页</span><i :class="sidebarshow? 'el-icon-caret-bottom':'el-icon-caret-right'" style="line-height: 70px;font-size: 10px;margin-left: 10px;"></i></i>
+                        </div>
+                        <div class="sidebarbox" v-if="sidebarshow">
+                            <ul>
+                                <li v-for="(item,index) in items" :key="index" @click="selectclick(item.index)">
+                                    <div class="icon" :style="{background: 'url('+item.icon+') no-repeat',backgroundPosition: 'top'}"></div>
+                                   <span>{{item.title}}</span> 
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </header>
-                <div class="sidebar">
-                    <el-menu class="sidebar-el-menu" :collapse="collapse" background-color="#324157"
-                        text-color="#bfcbd9" active-text-color="#20a0ff" unique-opened  @select="selectclick">
-                        <template v-for="item in items">
-                            <template v-if="item.subs">
-                                <el-submenu :index="item.index" :key="item.index">
-                                    <template slot="title">
-                                        <i :class="item.icon"></i><span slot="title" v-text="item.title"></span>
-                                    </template>
-                                    <el-menu-item v-for="(subItem,i) in item.subs" :key="i" :index="subItem.index" v-text="subItem.title">
-                                    </el-menu-item>
-                                </el-submenu>
-                            </template>
-                            <template v-else>
-                                <el-menu-item :index="item.index" :key="item.index">
-                                    <i :class="item.icon"></i><span slot="title" v-text="item.title"></span>
-                                </el-menu-item>
-                            </template>
-                        </template>
-                    </el-menu>
-                </div>
-                <div class="content-box" :class="{'content-collapse':collapse}">
-                    <div class="content" style="width: 95%;height:100%;">
+                <div class="content-box">
+                    <div class="content" style="width: 95%;height:90%;">
                         <servertemplate v-if="routerpath == 'server'" v-bind:modelback="modelBack" v-on:listen="showlisten" ></servertemplate>
-                        <mysqlittemplate v-if="routerpath == 'mysqllist'" v-bind:configuration="configUration" v-on:listen="showlisten"></mysqlittemplate>
+                        <squidtemplate v-if="routerpath == 'squid'" v-bind:configuration="configUration" v-on:listen="showlisten"></squidtemplate>
                         <!-- <iframe :src="'/view/listpage/'+routerpath+'.html'" style="width: 100%;height:100%;" frameborder="0"></iframe> -->
                     </div>
                 </div>

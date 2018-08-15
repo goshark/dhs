@@ -7,26 +7,28 @@ var Vm = new Vue({
 			// 操作后返回
 			modelBack:[],
 			// 双击热备 data
-			showData:[],
-			configUration:"",
+            showData:[],
+            // 导航展示
+            sidebarshow:false,
+			configUration:{post:"",hosts:""},
             username: "54166564168419",
             collapse: false,
             fullscreen: false,
             message: 2,
             collapse: false,
-            routerpath:"mysqllist",
+            routerpath:"server",
             redactVisible:false,
             dialogVisible:false,
 			slaveVisible:false,
             items: [
                 {
-                    icon: 'el-icon-setting',
+                    icon: '/static/img/host-color.png',
                     index: 'server',
                     title: '服务器'
                 },
                 {
-                    icon: 'el-icon-star-on',
-                    index: 'mysqllist',
+                    icon: '/static/img/squid-solo.png',
+                    index: 'squid',
                     title: 'squid'
                 }
             ],
@@ -53,12 +55,23 @@ var Vm = new Vue({
 		},
 		// 配置文件获取
 		getQueryhosts(){
-			const sendobj ={
+			var sendobj1 ={
 	            url:"/squid/query-hosts", 
 	            data:{jsoninfo:'{"name":"hosts"}'}
 	        }
-			var SendAjaxdata = SendAjax(sendobj,"post")	
-			this.configUration = SendAjaxdata.Msg
+            var SendAjax1 = SendAjax(sendobj1,"post")	
+            if(!SendAjax1.Success){
+                this.configUration['hosts'] = SendAjax1.Msg
+            }
+
+            var sendobj2 ={
+	            url:"/squid/query-hosts", 
+	            data:{jsoninfo:'{"name":"config"}'}
+	        }
+            var SendAjax2 = SendAjax(sendobj2,"post")	
+            if(!SendAjax2.Success){
+                this.configUration['config'] = SendAjax2.Msg
+            }
 		},
         showcloselisten(data){
             if(data.name == '添加关闭'){ 
@@ -90,12 +103,10 @@ var Vm = new Vue({
             if(document.body.clientWidth < 1500){
             }
         },
-        selectclick(key,keypath){
+        selectclick(key){
+            this.sidebarshow = false
             this.routerpath = key
           },
-        collapseChage(){
-            this.collapse = !this.collapse;
-        },
         handleFullScreen(){
             let element = document.documentElement;
             if (this.fullscreen) {
@@ -136,7 +147,7 @@ var Vm = new Vue({
     },
     components:{
         servertemplate:serverTemplate,
-        mysqlittemplate:mysqlitTemplate,
+        squidtemplate:squidTemplate,
         serveradd:serveraddMode,
         serverredact: serverredactMode,
 		serverslave:serverslaveMode

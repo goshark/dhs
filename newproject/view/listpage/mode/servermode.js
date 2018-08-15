@@ -13,7 +13,7 @@ var serveraddMode = {
                         <el-input v-model="formLabelAlign.dbuser" placeholder="请输入用户名"></el-input>
                     </el-form-item>
                     <el-form-item label="密码" prop="dbpass">
-                        <el-input v-model="formLabelAlign.dbpass" placeholder="请输入密码"></el-input>
+                        <el-input v-model="formLabelAlign.dbpass" type="password" placeholder="请输入密码"></el-input>
                     </el-form-item>
                     <el-form-item label="端口" prop="dbport">
                         <el-input v-model="formLabelAlign.dbport" placeholder="请输入端口号"></el-input>
@@ -138,9 +138,6 @@ var serverredactMode = {
                 ],
             },
         }
-    },
-    created(){
-        console.log(this)
     },
     methods:{
          // 关闭模态框

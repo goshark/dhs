@@ -15,7 +15,10 @@ body,
 body {
     font-family: 'PingFang SC', "Helvetica Neue", Helvetica, "microsoft yahei", arial, STHeiTi, sans-serif;
 }
-
+ul li {
+    list-style: none;
+    color: #000000
+}
 a {
     text-decoration: none;
     color: black;
@@ -23,14 +26,11 @@ a {
 
 .content-box {
     position: absolute;
-    left: 210px;
-    right: 0;
+    left: 200px;
+    right: 200px;
     top: 70px;
     bottom: 0;
-    overflow-y: scroll;
-    -webkit-transition: left .3s ease-in-out;
-    transition: left .3s ease-in-out;
-    background: #f0f0f0;
+    background: #fff;
 }
 
 .content {
@@ -194,7 +194,4 @@ a {
 }
 .message-title{
     color: #20a0ff;
-}
-.collapse-btn:hover{
-    background: rgb(40,52,70);
 }

@@ -89,6 +89,7 @@ func (s *ControllerSquid) Userform() {
 func (s *ControllerSquid) check(e error) {
 	if e != nil {
 		s.Response.WriteJson(&Response{Success: 2, Msg: "修改失败!"})
+		s.Exit()
 		return
 	}
 }

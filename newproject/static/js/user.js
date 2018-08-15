@@ -3,8 +3,8 @@ var vm = new Vue({
     data(){
         return {
             ruleForm: {
-                username: 'oyx',
-                password: '123456'
+                username: '',
+                password: ''
             },
             rules: {
                 username: [
@@ -22,12 +22,13 @@ var vm = new Vue({
             this.$refs[formName].validate((valid) => {
                 if (valid) {
                     sign_res = SendAjax({url:"register",data:{jsoninfo:JSON.stringify(this.ruleForm)}},'POST')
-					
 					if (sign_res.Success == 0){
-						alert(sign_res.Msg)
 						window.location.href = "login-index"
 					}else{
-						alert(sign_res.Msg)
+						this.$message({
+                            message: sign_res.Msg,
+                            type: 'error'
+                        });
 					}
                    
                 } else {
@@ -43,7 +44,10 @@ var vm = new Vue({
 					if(log_res.Success == 0){
 						window.location.href = "/"
 					}else{
-						alert(log_res.Msg)
+                        this.$message({
+                            message: log_res.Msg,
+                            type: 'error'
+                        });
 						return;
 					}
                 } else {

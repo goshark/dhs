@@ -92,7 +92,7 @@ var serverTemplate = {
             main(){
                 this.multipleSelection[0]["type"] = "master"
                 var sendobj ={
-                    url:"/home/action", 
+                    url:"http://10.1.2.193/home/action", 
                     data:{jsoninfo:JSON.stringify(this.multipleSelection[0])}
                 }
 				var notund = underwaydata(this,"设置主服务器")
