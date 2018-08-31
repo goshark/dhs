@@ -8,19 +8,40 @@ go语言结合[gitee.com/johng/gf](http://gitee.com/johng/gf)的web框架+vue前
 # 使用教程
 
 ## 下载 ##
+
+
  ```
- go get github.com/yanyuxuanz/dhs/newproject
+go get -u gitee.com/goshark/dhs
 
  ```
 ## 部署到服务器 ##
-1.将下载后在对应工作区目录(src/github.com)找到yanyuxuanz/dhs/目录；
+1.将下载后在对应工作区目录找到goshark/dhs/目录；
 
 
-2.对该目录中 newproject 项目进行压缩打包；
+2.编译运行该项目(window/linux注意env)；
 
-3.分别上传至主、从、和客户端（因为B/C/S架构，所以可直接用服务端来提供无需额外提供）,接下来对项目解压、设置项目执行权限、开启对应服务端口即可web访问。
+```
+go build -x -v
 
-4.前期功能较少，源码开放欢迎大家直接fork和更新。
+```
+
+3.将该项目打包（由于项目包含静态文件，建议项目整体打包）分别上传至主、从、和客户端（因为B/C/S架构，所以可直接用服务端来提供无需额外提供）；
+
+4.接下来对项目解压、设置项目执行权限、检查服务端网络连通性,运行可执行文件即可。
+
+
+5.通过任意端（部署完成后的机器）访问web（http://address:8888）即可跳转注册，登录，完成后进入管理平台首页。
+
+6.添加服务器至列表。
+
+7.选择对应服务器，进行主从设置。
+
+8.完成后最后一步进入各服务端进行验证。(主服务器登录mysqld创建测试数据库和数据，看从服务器是否更新)
+
+## 引用第三方库 ##
+[gitee.com/johng/gf](http://gitee.com/johng/gf)
+
+[github.com/Unknwon/goconfig](http://"github.com/Unknwon/goconfig")
 
 
 
